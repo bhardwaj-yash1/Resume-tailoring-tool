@@ -2,13 +2,14 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 from utils.llm_utils import resume_tailoring_tool
-from utils.pdf_utils import read_pdf, save_latex_code
+from utils.pdf_and_latex_utils import read_pdf, save_latex_code, latex_to_pdf
 
 pdf_path=os.getenv("pdf_path")
 latex_path=os.getenv("latex_path")
 jd_path=os.getenv("jd_path")
 api=os.getenv("api_key")
 saving_path=os.getenv("saving_path")
+output_latex_path=os.getenv("output_latex_path")
 
 import os
 print("Path exists?", os.path.exists(pdf_path))
@@ -24,4 +25,6 @@ with open(jd_path,"r",encoding="utf-8") as f:
 updated_latex=resume_tailoring_tool(resume_text=resume_text,jd_text=jd,latex_code=latex_code,api_key=api)
 
 save_latex_code(latex=updated_latex,save_path=saving_path)
+
+final_pdf_path=latex_to_pdf(output_latex_path)
 

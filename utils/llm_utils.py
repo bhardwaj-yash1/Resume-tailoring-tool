@@ -34,7 +34,7 @@ Task:
 **Output instructions**:
 - Return the **full LaTeX code**, ready to compile.
 - Do NOT return JSON or extra commentary.
-- Ensure no syntax errors or missing braces/commands.
+- Ensure **no syntax errors or missing braces/commands**.
 
 Job description:
 {jd_text}
