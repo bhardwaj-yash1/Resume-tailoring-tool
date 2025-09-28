@@ -54,7 +54,7 @@ import json
 response = requests.post(
   url="https://openrouter.ai/api/v1/chat/completions",
   headers={
-    "Authorization": "Bearer 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",   # ⚠️ rotate this key!
+    "Authorization": "Bearer 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",   # ⚠️ rotate this key!
     "HTTP-Referer": "<YOUR_SITE_URL>",        # optional
     "X-Title": "<YOUR_SITE_NAME>",            # optional
   },

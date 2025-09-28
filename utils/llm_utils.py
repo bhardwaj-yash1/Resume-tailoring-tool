@@ -3,62 +3,68 @@ import json
 import os
 import dotenv
 
-api_key=os.getenv("api_key")
+
 
 OPENROUTER_API_URL= "https://openrouter.ai/api/v1/chat/completions"
+        
+def resume_tailoring_tool(resume_text: str, jd_text: str, latex_code: str, api_key: str) -> dict:
 
-def resume_tailoring_tool(resume_text: str, jd_text: str, latex_code: str, api_key: str)-> dict:
+    prompt = f"""
+You are a professional resume assistant.
 
-    prompt= f"""
-     
-    you are professional resume tailoring assisstant. You stick to the format and maintain the same margins and vibe of the resume 
-    , just make changes by using keywords and by analyzing the job description carefully and align the final resume with the given job description.
+Task:
+- Take the following LaTeX resume template and the plain text resume.
+- Tailor the content according to the job description.
+- Do NOT change LaTeX formatting, packages, or commands.
+- Only modify the content inside each field (education, projects, experience, skills, summary, etc.)
+- Keep everything ATS-friendly and truthful.
+- DO NOT change the core of the resume and do NOT add fake stuff.
+- maintain the originality of the projects and their truthfullness
+- analyze everything deeply and then perform tailoring of the resume.
+- Return the full LaTeX code, ready to compile, as your output. Do NOT return JSON.
 
-    my resume text:
-    {resume_text}
-    
-    job description:
-    {jd_text}
+Job description:
+{jd_text}
 
-    latex code:
-    {latex_code}
+Original LaTeX template:
+{latex_code}
 
-    Task:
-    - Rewrite the resume so it highlights the required skills & responsibilities.
-    - Keep truthfulness (do not invent experiences).
-    - Use concise, ATS-friendly language.
-    - extract the resume fields and add the tailored content to the fields in the tailored form
-    - Return the resume strictly in valid JSON with these extracted fields.
-     
-       """
+Original resume text (plain):
+{resume_text}
+"""
+
+
+
     
     headers = {
-        "Authorization": f"Bearer {api_key}",
-        "HTTP-Referer": "http://localhost",
-        "X-Title": "Resume Tailoring Tool"
+        "Authorization": f"Bearer {api_key}",  # use the argument, not global
+        # "HTTP-Referer": "http://localhost",
+        # "X-Title": "Resume Tailoring Tool"
     }
 
     payload = {
-        "model": "x-ai/grok-4-fast:free",   # you can swap with claude, llama3, etc.
+        "model": "x-ai/grok-4-fast:free",
         "messages": [
             {"role": "system", "content": "You are a helpful assistant for tailoring resumes."},
             {"role": "user", "content": prompt}
         ],
         "temperature": 0.3
     }
-
-    response= requests.post(OPENROUTER_API_URL,headers=headers,json=payload)
-    
-
-    # tailored_json_str = result["choices"][0]["message"]["content"]
-
+    response = requests.post(OPENROUTER_API_URL, headers=headers, json=payload)
     try:
-        # tailored_content=json.loads(tailored_json_str)
-        result=response.text()
-        return result
-    
+         result = response.json()
+
+         if "choices" in result and len(result["choices"]) > 0:
+             tailored_content = result["choices"][0]["message"]["content"]
+         elif "error" in result:
+             print("⚠️ API returned an error:", result["error"])
+             tailored_content = ""
+         else:
+             print("⚠️ Unexpected response format:", result)
+             tailored_content = ""
+
+         return tailored_content
+
     except json.JSONDecodeError:
-        print("⚠️ LLM did not return valid JSON. Raw output:", result)
-        result={}
-        return result
-        
+         print("⚠️ Could not decode JSON. Raw response:", response.text)
+         return ""
