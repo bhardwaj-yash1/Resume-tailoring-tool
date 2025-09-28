@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.28)  28 SEP 2025 21:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.28)  28 SEP 2025 22:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -633,23 +633,17 @@ L3 programming layer <2024-01-04>
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-Package rerunfilecheck Warning: File `tailored.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `tailored.out':
-(rerunfilecheck)             Before: D41D8CD98F00B204E9800998ECF8427E;0
-(rerunfilecheck)             After:  B0D44417EC630F89C0B2C129A850DF19;640.
+Package rerunfilecheck Info: File `tailored.out' has not changed.
+(rerunfilecheck)             Checksum: B0D44417EC630F89C0B2C129A850DF19;640.
  ) 
 Here is how much of TeX's memory you used:
- 14615 strings out of 474486
- 254283 string characters out of 5743755
- 1956542 words of memory out of 5000000
- 36721 multiletter control sequences out of 15000+600000
+ 14621 strings out of 474486
+ 254340 string characters out of 5743755
+ 1955542 words of memory out of 5000000
+ 36727 multiletter control sequences out of 15000+600000
  566215 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,11n,79p,485b,458s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,11n,79p,405b,458s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/yashh/AppData/Local/Programs/MiKTeX/fonts/type1/public/fontawesome5
 /FontAwesome5Brands-Regular.pfb><C:/Users/yashh/AppData/Local/Programs/MiKTeX/f
 onts/type1/public/fontawesome5/FontAwesome5Free-Solid.pfb><C:/Users/yashh/AppDa
@@ -662,10 +656,10 @@ s/cm/cmr10.pfb><C:/Users/yashh/AppData/Local/Programs/MiKTeX/fonts/type1/public
 /public/amsfonts/cm/cmsy10.pfb><C:/Users/yashh/AppData/Local/Programs/MiKTeX/fo
 nts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/yashh/AppData/Local/Programs/M
 iKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on C:\Users\yashh\Test'\resume-s\tailored.pdf (1 page, 142021 by
+Output written on C:\Users\yashh\Test'\resume-s\tailored.pdf (1 page, 142948 by
 tes).
 PDF statistics:
- 79 PDF objects out of 1000 (max. 8388607)
+ 95 PDF objects out of 1000 (max. 8388607)
  7 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

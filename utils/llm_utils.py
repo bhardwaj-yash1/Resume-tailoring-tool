@@ -27,6 +27,9 @@ Task:
    - Only change the **content inside the fields** (education, projects, experience, skills, summary, etc.)
    - Ensure the output **compiles without errors**. 
    - Maintain correct LaTeX syntax strictly.
+   - Single page only 
+   - maintain same description length for every section
+
 4. **Context awareness**:
    - Keep descriptions consistent with the heading context. For example, project content stays as a project; do not turn it into learning content or exaggerate.
    - If a skill or project detail is not relevant to the job description, you can **slightly rephrase** to highlight relevant parts, but never invent new experiences or outcomes.
