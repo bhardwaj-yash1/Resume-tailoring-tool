@@ -10,18 +10,31 @@ OPENROUTER_API_URL= "https://openrouter.ai/api/v1/chat/completions"
 def resume_tailoring_tool(resume_text: str, jd_text: str, latex_code: str, api_key: str) -> dict:
 
     prompt = f"""
-You are a professional resume assistant.
+You are a highly skilled professional resume assistant and LaTeX expert.
 
 Task:
-- Take the following LaTeX resume template and the plain text resume.
-- Tailor the content according to the job description.
-- Do NOT change LaTeX formatting, packages, or commands.
-- Only modify the content inside each field (education, projects, experience, skills, summary, etc.)
-- Keep everything ATS-friendly and truthful.
-- DO NOT change the core of the resume and do NOT add fake stuff.
-- maintain the originality of the projects and their truthfullness
-- analyze everything deeply and then perform tailoring of the resume.
-- Return the full LaTeX code, ready to compile, as your output. Do NOT return JSON.
+1. You are given:
+   - A plain text resume
+   - A LaTeX resume template
+   - A job description
+2. Your job is to **tailor the resume to the job description** while keeping it:
+   - **Truthful**: Do NOT add any fake or fabricated information.
+   - **Original**: Do not change the core meaning of project descriptions, experience, or other sections.
+   - **Relevant**: Only add keywords or phrasing from the job description where appropriate.
+   - **ATS-friendly**: Keep it suitable for applicant tracking systems.
+3. **LaTeX instructions**:
+   - Do NOT modify any LaTeX packages, formatting, or commands.
+   - Only change the **content inside the fields** (education, projects, experience, skills, summary, etc.)
+   - Ensure the output **compiles without errors**. 
+   - Maintain correct LaTeX syntax strictly.
+4. **Context awareness**:
+   - Keep descriptions consistent with the heading context. For example, project content stays as a project; do not turn it into learning content or exaggerate.
+   - If a skill or project detail is not relevant to the job description, you can **slightly rephrase** to highlight relevant parts, but never invent new experiences or outcomes.
+
+**Output instructions**:
+- Return the **full LaTeX code**, ready to compile.
+- Do NOT return JSON or extra commentary.
+- Ensure no syntax errors or missing braces/commands.
 
 Job description:
 {jd_text}
@@ -32,8 +45,6 @@ Original LaTeX template:
 Original resume text (plain):
 {resume_text}
 """
-
-
 
     
     headers = {
