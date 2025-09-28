@@ -8,8 +8,9 @@ st.set_page_config(
     layout="centered"
 )
 
-# --- Backend API URL ---
-API_URL = "http://127.0.0.1:8000/tailor-resume/"
+# VITAL: REPLACE WITH YOUR ACTUAL RENDER API URL
+# This should be the public URL provided by Render for your backend service.
+API_URL = "https://resume-tailoring-tool.onrender.com"
 
 # --- UI Components ---
 st.title("📄✨ Resume Tailoring Tool")
@@ -18,7 +19,6 @@ st.markdown(
 )
 
 # --- Session State Initialization ---
-# This helps preserve state across reruns (e.g., after a failed attempt)
 if 'error_message' not in st.session_state:
     st.session_state.error_message = None
 if 'pdf_result' not in st.session_state:
@@ -72,18 +72,22 @@ if submitted:
     else:
         with st.spinner("Processing... This may take a moment. 🤖"):
             try:
-                # Prepare files and data for the API request
+                # Prepare files and data for the multipart/form-data request
                 files = {
-                    'resume_pdf': (resume_pdf_file.name, resume_pdf_file, 'application/pdf'),
-                    'latex_template': (latex_template_file.name, latex_template_file, 'application/x-tex')
+                    'resume_pdf': (resume_pdf_file.name, resume_pdf_file.getvalue(), 'application/pdf'),
+                    'latex_template': (latex_template_file.name, latex_template_file.getvalue(), 'application/x-tex')
                 }
                 data = {
                     'api_key': api_key,
                     'job_description': job_description
                 }
 
-                # Make the POST request to the backend
-                response = requests.post(API_URL, files=files, data=data, timeout=300)
+                # Make the POST request to the backend with files and data
+                response = requests.post(
+                    API_URL,
+                    files=files,
+                    data=data
+                )
 
                 # Handle the response
                 if response.status_code == 200:
@@ -92,7 +96,8 @@ if submitted:
                 else:
                     # Capture error detail from FastAPI
                     error_data = response.json()
-                    st.session_state.error_message = error_data.get('detail', 'An unknown error occurred.')
+                    detail = error_data.get('detail', 'An unknown error occurred.')
+                    st.session_state.error_message = f"Error from API (Status {response.status_code}): {detail}"
 
             except requests.exceptions.RequestException as e:
                 st.session_state.error_message = f"Failed to connect to the backend API. Please ensure it's running. Error: {e}"
@@ -100,7 +105,7 @@ if submitted:
 # --- Display Results or Errors ---
 if st.session_state.error_message:
     st.error(f"**An error occurred:**\n\n{st.session_state.error_message}")
-    st.info("Please correct the issue (e.g., check your LaTeX template) and try again.")
+    st.info("Please correct the issue and try again. If the error is about LaTeX compilation, check your .tex template for syntax errors.")
 
 if st.session_state.show_download and st.session_state.pdf_result:
     st.success("✅ Your tailored resume is ready!")
