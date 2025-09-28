@@ -10,7 +10,7 @@ st.set_page_config(
 
 # VITAL: REPLACE WITH YOUR ACTUAL RENDER API URL
 # This should be the public URL provided by Render for your backend service.
-API_URL = "https://resume-tailoring-tool.onrender.com"
+API_URL = "https://resume-tailoring-tool.onrender.com/tailor-resume/"
 
 # --- UI Components ---
 st.title("📄✨ Resume Tailoring Tool")
