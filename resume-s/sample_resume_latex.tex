@@ -1,0 +1,232 @@
+
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+\usepackage[margin=1.4cm]{geometry}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.15in}
+ \addtolength{\textwidth}{0.3in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{0pt}}
+  }
+}
+
+\newcommand{\classesList}[4]{
+    \item\small{
+        {#1 #2 #3 #4 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}\vspace{0pt}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    {\Large \scshape Yash Bhardwaj} \\[3mm]
+    \footnotesize \raisebox{-0.1\height}
+    \faPhone\ \underline{9xxxxxxxxx} ~ 
+    {\faEnvelope\  \underline{sample@gmail.com}} ~ 
+    {\faLinkedin\ \underline{\href{https://www.linkedin.com/in/yash-bhardwaj-b662b2290/}{linkedin.com/in/random-user}}  ~
+    {\faGithub\ \underline{\href{https://github.com/bhardwaj-yash1}{github.com/bhardwaj-yash1 }} ~
+    % {\faBriefcase\ \underline{\href{https://mscott-portfolio.vercel.app/}{mscott-portfolio.vercel.app/}}
+    \vspace{-5pt}
+\end{center}
+
+ %-----------EDUCATION-----------
+\section{Professional Summary} \\[1mm]
+      {Computer Engineering student with proven skills in Machine Learning, NLP, and MLOps. Possesses a strong ability to build and deploy end-to-end AI applications, from initial data analysis to containerized deployment. Seeking an AI or Data Science internship to contribute to impactful projects and further develop technical skills.}
+    
+    \vspace{-7pt}
+\section{Education} \\[1mm]
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {cooked college of information technology}{Expected Graduation: Aug 2027}
+      {Bachelor of Computer Engineering | Minor Artificial Intelligence
+      }{Bhubaneswar, India}
+  \resumeSubHeadingListEnd
+    \resumeItemListStart
+        \resumeItem {GPA: 7.86/ 10}}
+        \vspace{-7pt}
+        \resumeItem {Courses: Data Structure and Algorithms, Object Oriented Programming, DBMS,Computer Architecture, Linear Algebra}
+    \resumeItemListEnd
+    \vspace{-22pt}
+%-----------Experience---------------
+% \section{Work Experience}
+%     \resumeSubHeadingListStart
+%                 \resumeSubheading{Tech Company}{May 2024 -- Sep 2024}{Machine Learning Engineer Intern}{Location} 
+%                 \resumeItemListStart
+%                     \resumeItem{Engineered \textbf{Large Language Models (LLMs)}, including \textbf{BERT} and \textbf{Attention Models}, to analyze software engineering requirements and generate accurate dependency lists, improving project planning efficiency by \textbf{37\%}}
+%                     \resumeItem{Analyzed \textbf{1200+} software requirements monthly using \textbf{scikit-learn (classification models)}, \textbf{spaCy}, and \textbf{NLTK} in \textbf{Python}, saving the company \textbf{\$20,000 annually} by decreasing project lead times}
+%                     \resumeItem{Integrated \textbf{TF-IDF vectorization} to detect similarities in software requirements, focusing on \textbf{preprocessing}, \textbf{model training}, \textbf{hyperparameter tuning} and \textbf{clustering} to optimize \textbf{NLP} analysis processes}
+%                     \resumeItemListEnd
+%             \resumeSubheading{Tech Company}{May 2023 -- Sep 2023}{Backend Engineer Intern}{Location} 
+%                 \resumeItemListStart
+%                     \resumeItem{Designed \textbf{30+ AWS Lambda Functions}, strategically leveraging \textbf{Lambda layers} to increase processing speed by \textbf{35\%} and re-usability by \textbf{52\%}, resulting in cost savings of \textbf{\$1,000} per large scale deployment}
+%                     \resumeItem{Implemented \textbf{15+} server less workflows using \textbf{AWS Step Functions}, seamlessly integrating \textbf{REST APIs} and rigorously tested with \textbf{Postman},  resulting in a \textbf{65\%} reduction in execution time and enhanced operational efficiency}
+%                     \resumeItem{Crafted a \textbf{Spring Boot} application with a \textbf{Drools} logic engine, containerized it using \textbf{Docker}, and seamlessly deployed it on \textbf{AWS} using \textbf{EC2}, strategically allocating cloud resources to ensure enhanced scalability and reliability}
+%                     \resumeItemListEnd
+%             \resumeSubheading{Tech Company}{Jun 2022 -- Sep 2022}{Software Engineer Intern}{Location}
+%                 \resumeItemListStart
+%                     \resumeItem{Programmed and deployed a \textbf{Python}-based data migration pipeline on \textbf{Azure}, achieving a \textbf{50\% reduction} in transfer time for \textbf{100+ terabytes} of critical business data}
+%                     \resumeItem{Centralized a \textbf{SQL} database infrastructure on \textbf{Azure}, enhancing data accessibility and security for \textbf{50+ stakeholders}, resulting in a \textbf{30\% improvement} in query performance across the organization}
+%                     \resumeItemListEnd
+%     \resumeSubHeadingListEnd
+%     \vspace{-12pt}
+
+%-----------PROJECTS-----------
+\section{Projects} 
+    \vspace{-5pt}
+    \resumeSubHeadingListStart
+    \resumeProjectHeading
+            {\textbf{{DriftRadar }} $|$ \emph{\href{https://github.com/bhardwaj-yash1/Drift-radar}{Source Code}}}{ReactJS $|$  Docker $|$ Generative AI (Llama 3) $|$ FastAPI  $|$ PostgreSQL}
+            \\[5mm]
+          \resumeItemListStart
+            \resumeItem{Developed a \textbf{production-grade MLOps platform} to detect and monitor \textbf{data/model drift} in real time. }
+            \resumeItem{Built a \textbf{FastAPI REST backend} (PSI, Wasserstein distance) with a \textbf{React.js dashboard} for visualization    .}
+             \resumeItem{Integrated \textbf{Generative AI (Llama 3)} for automated root-cause analysis and \textbf{containerized with Docker} for scalable deployment and aligning with modern \textbf{CI/CD best practices}.}
+          \resumeItemListEnd
+          
+ \vspace{-20pt}
+ \resumeProjectHeading
+            {\textbf{{Animal Disease Detection Model}} $|$ \emph{\href{https://github.com/bhardwaj-yash1/Companion-Kit}{Source Code}}}{Python $|$ Scikit-learn  $|$ Pandas  $|$ Streamlit $|$ SHAP }
+            \\[5mm]
+          \resumeItemListStart
+            \resumeItem{Built an \textbf{XGBoost classification model} on \textbf{43k+ clinical records}, achieving \textbf{92\% accuracy}.}
+            \resumeItem{Applied \textbf{EDA, preprocessing, and feature engineering} to address \textbf{class imbalance}, optimizing \textbf{Macro-F1 and ROC-AUC}.}
+            \resumeItem{Integrated \textbf{SHAP (Explainable AI)} for interpretable predictions in \textbf{clinical decision support}.}
+          \resumeItemListEnd
+ \vspace{-17pt}
+ \resumeProjectHeading
+ {\textbf{{FAQ Bot for Discord}} $|$ \emph{\href{https://github.com/bhardwaj-yash1/discord-faq-bot}{Source Code}}}{Python $|$ Scikit-learn  $|$ Discord.py   $|$ NLTK}
+\\[5mm]
+\resumeItemListStart
+\resumeItem{Designed an \textbf{NLP pipeline} with \textbf{NLTK} (tokenization, lemmatization, stopword removal) for query understanding.}
+\resumeItem{Trained a \textbf{TF-IDF + Logistic Regression} model to achieve \textbf{85\% intent classification accuracy}.}
+\resumeItem{
+Automated \textbf{real-time query resolution} on Discord, providing 24/7 user support.
+}
+
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+\vspace{-20pt}
+%-----------LEADERSHIP-----------
+\section{Leadership \& Extracurriculars}
+    \vspace{-3pt}
+    \resumeSubHeadingListStart
+
+        \resumeProjectHeading
+            {\textbf{Film and Theater Society, IIIT Bhubaneswar}}
+            {Aug 2023 – May 2025}
+        \resumeItemListStart
+            \resumeItem{Edited and produced 15+ event promotion videos, boosting engagement by 30\%.}
+            \resumeItem{Led a 4-member media team for the annual fest, managing live coverage and media production.}
+        \resumeItemListEnd
+        \vspace{-17pt}
+        \resumeProjectHeading
+            {\textbf{Advaita Techno-Cultural Fest, IIIT Bhubaneswar}}
+            {Core Team}
+        \resumeItemListStart
+            \resumeItem{Coordinated logistics for 10+ events, ensuring smooth execution.}
+            \resumeItem{Organized Inter-College Robo Soccer Competition with 100+ participants.}
+        \resumeItemListEnd
+        
+    \resumeSubHeadingListEnd
+\section{Technical Skills}
+\vspace{-4pt}
+{ % Start a group to keep the change local
+\renewcommand{\arraystretch}{1.4} % Increase row spacing
+\begin{tabularx}{\linewidth}{@{} p{5.4cm} X @{}} % Wider first column
+    \textbf{Programming \& Databases} & Python, SQL, C++, JavaScript, R (basic) \\
+    \textbf{Machine Learning} & Scikit-learn, XGBoost, Random Forest, TensorFlow, PyTorch, SHAP \\
+    \textbf{Data Science \& Analytics} & Pandas, NumPy, Exploratory Data Analysis (EDA), Data Visualization (Matplotlib, Seaborn), Data Analytics \\
+    \textbf{NLP \& AI} & NLTK, TF-IDF, Generative AI (LLMs), Intent Classification, Transformers (basic) \\
+    \textbf{MLOps \& Deployment} & FastAPI, REST, Docker, Model Monitoring (Evidently), CI/CD \\
+    \textbf{Web \& Tools} & React.js, Streamlit, PostgreSQL, Git, GitHub, Jupyter, VS Code \\
+\end{tabularx}
+}
+
+ \vspace{-16pt}
+ \vspace{3pt}
+\vspace{10pt}
+
+\vspace{-15pt}
+
+
+
+\end{document}
