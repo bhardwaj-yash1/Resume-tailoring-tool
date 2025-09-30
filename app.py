@@ -66,7 +66,7 @@ def call_llm_for_tailoring(api_key, resume_text, job_description, template_text)
             url="https://openrouter.ai/api/v1/chat/completions",
             headers={"Authorization": f"Bearer {api_key}"},
             json={
-                "model": "nousresearch/nous-hermes-2-mixtral-8x7b-dpo", # A capable model
+                "model": "google/gemini-flash-1.5", # Switched to a currently available and capable model
                 "messages": [{"role": "user", "content": prompt}],
                 "temperature": 0.3
             },
@@ -192,3 +192,4 @@ if st.session_state.pdf_result:
         mime="application/pdf",
         use_container_width=True
     )
+
