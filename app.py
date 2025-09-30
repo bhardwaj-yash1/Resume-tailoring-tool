@@ -124,24 +124,24 @@ import fitz  # PyMuPDF
 import subprocess
 import os
 import tempfile
+import json # Import the json library
 
 # --- ⚙️ Helper Functions (Backend Logic) ---
 
 def extract_text_from_pdf(pdf_file):
     """Reads an uploaded PDF file and returns its text content."""
+    # ... (This function remains the same) ...
     try:
-        # Open the PDF from the uploaded file's bytes
         pdf_document = fitz.open(stream=pdf_file.getvalue(), filetype="pdf")
         text = ""
         for page in pdf_document:
             text += page.get_text()
         return text
     except Exception as e:
-        st.error(f"Error reading PDF file: {e}")
-        return None
+        raise ValueError(f"Error reading PDF file: {e}")
 
 def call_openrouter_llm(api_key, resume_text, job_description, template_text):
-    """Calls the OpenRouter API to get the tailored LaTeX content."""
+    """Calls the OpenRouter API and returns the tailored LaTeX content."""
     prompt = f"""
     You are an expert resume writer. Your task is to tailor the provided resume content to the job description using the given LaTeX template.
     
@@ -165,29 +165,40 @@ def call_openrouter_llm(api_key, resume_text, job_description, template_text):
     try:
         response = requests.post(
             url="https://openrouter.ai/api/v1/chat/completions",
-            headers={
-                "Authorization": f"Bearer {api_key}",
-            },
+            headers={"Authorization": f"Bearer {api_key}"},
             json={
-                "model": "mistralai/mistral-7b-instruct:free", # Or any other model
+                "model": "nousresearch/nous-hermes-2-mixtral-8x7b-dpo", # Or your preferred good model
                 "messages": [{"role": "user", "content": prompt}],
             },
-            timeout=180 # 3 minutes timeout
+            timeout=180
         )
-        response.raise_for_status()
-        tailored_latex = response.json()['choices'][0]['message']['content']
-        # Clean up the response in case the model adds extra formatting
+        response.raise_for_status() # Check for HTTP errors like 401, 429, etc.
+        
+        # Try to parse the JSON and get the content
+        data = response.json()
+        tailored_latex = data['choices'][0]['message']['content']
+        
+        # Clean up the response
         if tailored_latex.strip().startswith("```latex"):
             tailored_latex = tailored_latex.strip()[7:]
             if tailored_latex.strip().endswith("```"):
                 tailored_latex = tailored_latex.strip()[:-3]
         return tailored_latex
+
+    except requests.exceptions.HTTPError as http_err:
+        # Handle HTTP errors specifically
+        raise ValueError(f"HTTP Error from API: {http_err}\nResponse Body: {response.text}")
+    except (json.JSONDecodeError, KeyError, IndexError) as e:
+        # This catches cases where the response is not valid JSON or has an unexpected structure
+        # This is the MOST LIKELY place the error is happening.
+        raise ValueError(f"API returned an unexpected response. It might be a rate limit or API key issue. Raw Response: \n\n{response.text}")
     except requests.exceptions.RequestException as e:
-        st.error(f"API Request Failed: {e}")
-        return None
+        raise ValueError(f"API Request Failed: {e}")
+
 
 def compile_latex_to_pdf(latex_string):
     """Compiles a string of LaTeX code into a PDF and returns the PDF bytes."""
+    # ... (This function remains the same) ...
     with tempfile.TemporaryDirectory() as temp_dir:
         tex_path = os.path.join(temp_dir, "tailored.tex")
         pdf_path = os.path.join(temp_dir, "tailored.pdf")
@@ -196,12 +207,12 @@ def compile_latex_to_pdf(latex_string):
             f.write(latex_string)
 
         try:
-            # Run pdflatex twice to ensure all references are correctly generated
+            # Run pdflatex twice
             for _ in range(2):
-                subprocess.run(
+                result = subprocess.run(
                     ["pdflatex", "-interaction=nonstopmode", "-output-directory", temp_dir, tex_path],
-                    check=True,  # Raise an exception if the command fails
-                    capture_output=True, # Capture stdout and stderr
+                    check=True,
+                    capture_output=True,
                     text=True
                 )
             
@@ -209,55 +220,54 @@ def compile_latex_to_pdf(latex_string):
                 with open(pdf_path, "rb") as f:
                     return f.read()
             else:
-                return None
+                raise RuntimeError("PDF file was not generated despite successful compilation.")
         except subprocess.CalledProcessError as e:
-            # Provide detailed error log from LaTeX
-            st.error("LaTeX Compilation Failed. See logs below.")
-            st.code(e.stdout + "\n" + e.stderr, language='log')
-            return None
+            # Raise an exception with the detailed log
+            raise RuntimeError(f"LaTeX Compilation Failed. Log:\n{e.stdout}\n{e.stderr}")
 
 # --- 🖼️ Streamlit UI ---
 
 st.set_page_config(page_title="Resume Tailoring Tool", page_icon="📄", layout="centered")
 
 st.title("📄✨ Resume Tailoring Tool")
-st.markdown("Upload your resume, paste the job description, and provide a LaTeX template to get a tailored resume ready to go!")
+# ... (UI text remains the same) ...
 
 if 'pdf_result' not in st.session_state:
     st.session_state.pdf_result = None
 
 with st.form("resume_form"):
+    # ... (Form elements remain the same) ...
     st.header("1. Your Credentials")
     api_key = st.text_input("OpenRouter API Key", type="password")
-
     st.header("2. Your Documents")
     resume_pdf_file = st.file_uploader("Upload Your Resume (PDF)", type="pdf")
     latex_template_file = st.file_uploader("Upload Your LaTeX Template (.tex)", type="tex")
-
     st.header("3. The Job")
     job_description = st.text_area("Job Description", height=250)
-    
     submitted = st.form_submit_button("🚀 Tailor My Resume", use_container_width=True)
 
+
 if submitted:
-    st.session_state.pdf_result = None # Reset previous result
+    st.session_state.pdf_result = None
     if not all([api_key, resume_pdf_file, latex_template_file, job_description]):
         st.warning("Please fill in all the fields.")
     else:
         with st.spinner("Processing... This may take a few minutes. 🤖"):
-            # Step 1: Extract text from resume
-            resume_text = extract_text_from_pdf(resume_pdf_file)
-            template_text = latex_template_file.read().decode("utf-8")
-            
-            if resume_text and template_text:
-                # Step 2: Call LLM for tailored LaTeX code
+            try:
+                # --- THIS IS THE UPDATED LOGIC ---
+                template_text = latex_template_file.read().decode("utf-8")
+                resume_text = extract_text_from_pdf(resume_pdf_file)
+                
                 tailored_latex = call_openrouter_llm(api_key, resume_text, job_description, template_text)
                 
-                if tailored_latex:
-                    # Step 3: Compile LaTeX to PDF
-                    pdf_bytes = compile_latex_to_pdf(tailored_latex)
-                    if pdf_bytes:
-                        st.session_state.pdf_result = pdf_bytes
+                pdf_bytes = compile_latex_to_pdf(tailored_latex)
+                
+                st.session_state.pdf_result = pdf_bytes
+            
+            except (ValueError, RuntimeError) as e:
+                # Catch the specific errors from our helper functions and display them
+                st.error(str(e))
+
 
 if st.session_state.pdf_result:
     st.success("✅ Your tailored resume is ready!")
