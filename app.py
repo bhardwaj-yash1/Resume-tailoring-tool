@@ -9,7 +9,7 @@ st.set_page_config(page_title="Resume Tailoring Tool", layout="centered")
 st.title("Resume Tailoring Tool")
 st.write("Upload your resume (PDF), LaTeX template (.tex) and paste the job description. The backend will call the LLM and compile the tailored PDF.")
 
-API_URL = st.text_input("Backend URL (FastAPI)", value=os.getenv("BACKEND_URL", "https://your-render-service.example.com/api/tailor"))
+API_URL = st.text_input("Backend URL (FastAPI)", value=os.getenv("BACKEND_URL", "https://resume-tailoring-tool.onrender.com/"))
 
 with st.form("tailor_form"):
     resume_file = st.file_uploader("Upload resume (PDF)", type=["pdf"])
