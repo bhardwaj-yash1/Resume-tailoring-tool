@@ -32,6 +32,13 @@ TMP_DIR.mkdir(parents=True, exist_ok=True)
 def _save_upload(upload_file: UploadFile, dest: Path) -> None:
     with dest.open("wb") as f:
         shutil.copyfileobj(upload_file.file, f)
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"message": "Resume Tailor API is running 🚀"}
 
 @app.post("/api/tailor")
 async def tailor(
