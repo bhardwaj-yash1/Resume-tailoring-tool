@@ -101,6 +101,48 @@ def resume_tailoring_pipeline(
     print(f"✅ Pipeline completed. Final tailored PDF at: {final_pdf_path}")
     return final_pdf_path
 
+import tempfile
+import shutil
+
+def run_tailoring(resume_pdf_path, latex_template_path, jd_text, api_key=None, keep_files=False):
+    """
+    Run tailoring pipeline from FastAPI (works with uploaded files).
+    Returns:
+        (pdf_path, latex_code) -> tuple
+    """
+
+    # Step 1: Read plain text from resume PDF
+    resume_text = read_pdf(pdf_path=resume_pdf_path)
+
+    # Step 2: Load LaTeX template
+    with open(latex_template_path, "r", encoding="utf-8") as f:
+        latex_code = f.read()
+
+    # Step 3: Call LLM to tailor LaTeX
+    updated_latex = resume_tailoring_tool(
+        resume_text=resume_text,
+        jd_text=jd_text,
+        latex_code=latex_code,
+        api_key=api_key
+    )
+
+    # Step 4: Write tailored LaTeX to temp file
+    temp_dir = tempfile.mkdtemp()
+    tailored_tex_path = os.path.join(temp_dir, "tailored.tex")
+    save_latex_code(updated_latex, tailored_tex_path)
+
+    # Step 5: Compile to PDF
+    tailored_pdf_path = latex_to_pdf(tailored_tex_path)
+
+    # Clean up temp files unless debugging
+    if not keep_files:
+        try:
+            shutil.rmtree(temp_dir)
+        except Exception as e:
+            print(f"⚠️ Cleanup failed: {e}")
+
+    return tailored_pdf_path, updated_latex
+
 
 # Example usage (if you want to call directly from main.py)
 if __name__ == "__main__":
