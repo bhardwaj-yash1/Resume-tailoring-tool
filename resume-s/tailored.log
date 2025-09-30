@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.28)  28 SEP 2025 22:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.28)  30 SEP 2025 22:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -639,11 +639,11 @@ Package rerunfilecheck Info: File `tailored.out' has not changed.
 Here is how much of TeX's memory you used:
  14621 strings out of 474486
  254340 string characters out of 5743755
- 1955542 words of memory out of 5000000
+ 1956542 words of memory out of 5000000
  36727 multiletter control sequences out of 15000+600000
  566215 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,11n,79p,405b,458s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,11n,79p,423b,458s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/yashh/AppData/Local/Programs/MiKTeX/fonts/type1/public/fontawesome5
 /FontAwesome5Brands-Regular.pfb><C:/Users/yashh/AppData/Local/Programs/MiKTeX/f
 onts/type1/public/fontawesome5/FontAwesome5Free-Solid.pfb><C:/Users/yashh/AppDa
@@ -656,7 +656,7 @@ s/cm/cmr10.pfb><C:/Users/yashh/AppData/Local/Programs/MiKTeX/fonts/type1/public
 /public/amsfonts/cm/cmsy10.pfb><C:/Users/yashh/AppData/Local/Programs/MiKTeX/fo
 nts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/yashh/AppData/Local/Programs/M
 iKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on C:\Users\yashh\Test'\resume-s\tailored.pdf (1 page, 142948 by
+Output written on C:\Users\yashh\Test'\resume-s\tailored.pdf (1 page, 142615 by
 tes).
 PDF statistics:
  95 PDF objects out of 1000 (max. 8388607)
